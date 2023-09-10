@@ -1,0 +1,9 @@
+const states = [
+  { name: "Alabama", capital: "Montgomery" },
+  { name: "Alaska", capitol: "Juneau" },
+  { name: "Arizona", capital: "Phoenix" },
+];
+
+for (const state of states) {
+  console.log(state.capital);
+}

@@ -1,13 +1,16 @@
-# 🦁 멋쟁이사자처럼 프론트엔드 스쿨 6기 - TypeScript 스터디 🦁
+# [이펙티브 타입스크립트](https://effectivetypescript.com/)
 
 ## 📌 스터디 소개
 
-아래의 참고자료를 통해 TypeScript를 공부합니다.
+이펙티브 타입스크립트를 통해 타입스크립트를 공부하는 스터디입니다.
 
-1. **[TypeScript 공식문서](https://www.typescriptlang.org/)** <small>By Microsoft</small> & **[러닝 타입스크립트](https://www.learningtypescript.com/)** <small>By [Josh Goldberg](https://github.com/LearningTypeScript/site)</small>
-   저장소는 [LearningTS]()
+## 목차
 
-2. **[이펙티브 타입스크립트](https://effectivetypescript.com/)** <small>By [Dan Vanderkam](https://github.com/danvk/effective-typescript)</small>
-   저장소는 [EffectiveTS]()
-
-스터디를 정리한 노션 링크는 [🔗여기](https://likeliontypescript.notion.site/TypeScript-Study-127774cf21d144b6ac2e1c46760dbd23?pvs=4) 입니다.
+- 1장 타입스크립트 알아보기
+  - 아이템1 📝 타입스크립트와 자바스크립트의 관계 [Code]() [Notion]()
+  - 아이템2 📝 타입스크립트 설정 이해하기 [Code]() [Notion]()
+  - 아이템3 📝 코드 생성과 타입이 관계없음을 이해하기 [Code]() [Notion]()
+  - 아이템4 📝 구조적 타이핑 이해하기 [Code]() [Notion]()
+  - 아이템5 📝 any 타입 지양하기 [Code]() [Notion]()
+- 2장 타입스크립트의 타입 시스템
+  - 아이템6 📝

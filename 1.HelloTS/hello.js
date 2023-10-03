@@ -24,6 +24,12 @@
 // const str = "hello";
 /* ----------------------------------------------------------------------- */
 function greet(person, date) {
-  console.log(`Hello ${person}, today is ${date.toDateString()}!`);
+    console.log(`Hello ${person}, today is ${date.toDateString()}!`);
 }
 greet("Maddison", new Date());
+var a = 1;
+let b = 2;
+const c = 3;
+const sum = (x, y) => {
+    return x + y;
+};

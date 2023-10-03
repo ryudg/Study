@@ -38,3 +38,11 @@ function greet(person: string, date: Date) {
 }
 
 greet("Maddison", new Date());
+
+var a = 1;
+let b = 2;
+const c = 3;
+
+const sum = (x: number, y: number): number => {
+  return x + y;
+};

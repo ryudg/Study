@@ -15,7 +15,7 @@ TypeScript 공식문서와 러닝 타입스크립트를 통해 타입스크립�
 7. 📝 Interfaces [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/7.Interface) [Notion](https://www.notion.so/likeliontypescript/7-04f71ff43b204a9bb43527a991afaf4a)
 8. 📝 Classes [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/8.Class) [Notion](https://www.notion.so/likeliontypescript/8-2efc03c5248f465d92be2d16de0e006d)
 9. 📝 Type Modifiers [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/9.Modifier) [Notion](https://www.notion.so/likeliontypescript/9-c5cf62b9a7a447d9bff34f68d6deee40)
-10. 📝 Generics [Code]() [Notion]()
+10. 📝 Generics [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/10.Generic) [Notion](https://www.notion.so/likeliontypescript/10-954096e3d26c44c191e6a01e0015b74f)
 11. 📝 Declaration Files [Code]() [Notion]()
 12. 📝 Using IDE Features [Code]() [Notion]()
 13. 📝 Configuration Options [Code]() [Notion]()

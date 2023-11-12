@@ -1,0 +1,3 @@
+thisVariableIsNotDefined;
+
+thisVariableAlsoNotDefined;

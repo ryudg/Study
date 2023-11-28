@@ -12,9 +12,11 @@
 
 스터디를 정리한 노션 링크는 [🔗여기](https://likeliontypescript.notion.site/TypeScript-Study-127774cf21d144b6ac2e1c46760dbd23?pvs=4) 입니다.
 
+# LearningTS
+
 ## 📌 스터디 소개
 
-TypeScript 공식문서와 러닝 타입스크립트를 통해 타입스크립트를 공부하는 저장소입니다.
+TypeScript 공식문서와 Learning TypeScript를 통해 TypeScript를 공부하는 저장소입니다.
 
 ### LearningTS 목차
 
@@ -34,11 +36,13 @@ TypeScript 공식문서와 러닝 타입스크립트를 통해 타입스크립�
 14. 📝 Syntax Extensions [Code]() [Notion]()
 15. 📝 Type Operations [Code]() [Notion]()
 
-## EffectiveTS 목차
+# EffectiveTS
 
-이펙티브 타입스크립트를 통해 타입스크립트를 공부하는 스터디입니다.
+## 📌 스터디 소개
 
-### 목차
+Effective TypeScript를 통해 TypeScript를 공부하는 스터디입니다.
+
+### EffectiveTS 목차
 
 - 1장 타입스크립트 알아보기
   - 아이템1 📝 타입스크립트와 자바스크립트의 관계 [Code](https://github.com/ryudg/TypeScriptStudy/tree/main/EffectiveTS/Section1/Item1) [Notion](https://www.notion.so/likeliontypescript/1-TypeScript-JavaScript-21ceb7e479604553954a7ccb5ef1cb7f)

@@ -12,8 +12,6 @@
 
 스터디를 정리한 노션 링크는 [🔗여기](https://likeliontypescript.notion.site/TypeScript-Study-127774cf21d144b6ac2e1c46760dbd23?pvs=4) 입니다.
 
-# **[TypeScript 공식문서](https://www.typescriptlang.org/)** & **[러닝 타입스크립트](https://www.learningtypescript.com/)**
-
 ## 📌 스터디 소개
 
 TypeScript 공식문서와 러닝 타입스크립트를 통해 타입스크립트를 공부하는 저장소입니다.

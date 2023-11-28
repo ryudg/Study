@@ -18,6 +18,6 @@ TypeScript 공식문서와 러닝 타입스크립트를 통해 타입스크립�
 10. 📝 Generics [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/10.Generic) [Notion](https://www.notion.so/likeliontypescript/10-954096e3d26c44c191e6a01e0015b74f)
 11. 📝 Declaration Files [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/11.Declaration) [Notion](https://www.notion.so/likeliontypescript/11-ecc9eaad73ce4d11b96a224ac792a5e8)
 12. 📝 Using IDE Features [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/12.IDE) [Notion](https://www.notion.so/likeliontypescript/12-IDE-cf1d05604b6d4917bfd5c8e20f6b6a8b)
-13. 📝 Configuration Options [Code]() [Notion]()
+13. 📝 Configuration Options [Code](https://github.com/ryudg/TypeScriptStudy/tree/LearningTS/13.ConfigurationOptions) [Notion](https://www.notion.so/likeliontypescript/13-381a133836954565ae46fc65ef63189b)
 14. 📝 Syntax Extensions [Code]() [Notion]()
 15. 📝 Type Operations [Code]() [Notion]()

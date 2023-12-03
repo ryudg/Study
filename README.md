@@ -1,4 +1,4 @@
-# 🦁 멋쟁이사자처럼 프론트엔드 스쿨 6기 - TypeScript 스터디 🦁
+# TypeScript 스터디 🦁
 
 ## 📌 스터디 소개
 
@@ -33,8 +33,8 @@ TypeScript 공식문서와 Learning TypeScript를 통해 TypeScript를 공부하
 11. 📝 Declaration Files [Code](https://github.com/ryudg/TypeScriptStudy/tree/main/LearningTS/11.Declaration) [Notion](https://www.notion.so/likeliontypescript/11-ecc9eaad73ce4d11b96a224ac792a5e8)
 12. 📝 Using IDE Features [Code](https://github.com/ryudg/TypeScriptStudy/tree/main/LearningTS/12.IDE) [Notion](https://www.notion.so/likeliontypescript/12-IDE-cf1d05604b6d4917bfd5c8e20f6b6a8b)
 13. 📝 Configuration Options [Code](https://github.com/ryudg/TypeScriptStudy/tree/main/LearningTS/13.ConfigurationOptions) [Notion](https://www.notion.so/likeliontypescript/13-381a133836954565ae46fc65ef63189b)
-14. 📝 Syntax Extensions [Code]() [Notion]()
-15. 📝 Type Operations [Code]() [Notion]()
+14. 📝 Syntax Extensions [Code](https://github.com/ryudg/TypeScriptStudy/tree/main/LearningTS/14.SyntaxExtensions) [Notion](https://www.notion.so/likeliontypescript/14-3ee10ab423cb4fd09db73d4eb7105300)
+15. 📝 Type Operations [Code](https://github.com/ryudg/TypeScriptStudy/tree/main/LearningTS/15.TypeOperations) [Notion](https://www.notion.so/likeliontypescript/15-70766bd92e6445b9bdfd358513c26f22)
 
 # EffectiveTS
 

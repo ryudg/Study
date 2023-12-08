@@ -6,4 +6,4 @@
 
 | [Learning TypeScript](https://github.com/ryudg/TypeScriptStudy/tree/main/TypeScript/LearningTS) | [Effective TypeScript](https://github.com/ryudg/TypeScriptStudy/tree/main/TypeScript/EffectiveTS) |
 | :---------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------: |
-|        ![](https://www.learningtypescript.com/img/cover.png){: width="150" height="200"}        |         ![](https://effectivetypescript.com/images/cover.jpg){: width="150" height="200"}         |
+|                      ![](https://www.learningtypescript.com/img/cover.png)                      |                       ![](https://effectivetypescript.com/images/cover.jpg)                       |

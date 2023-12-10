@@ -4,9 +4,9 @@
 
 ## ![JavaScript](https://skillicons.dev/icons?i=js) JavaScript
 
-| [모던 자바스크립트<br> Deep Dive](https://github.com/ryudg/Study/tree/main/JavaScript/DeepDive) | [자바스크립트<br> 완벽 가이드]()                                                                     |
-| :---------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------- |
-|  <img src="https://wikibook.co.kr/images/cover/l/9791158392239.jpg" width="150" height="200"/>  | <img src="https://learning.oreilly.com/library/cover/9788966263462/250w/" width="150" height="200"/> |
+|        [모던 자바스크립트<br> Deep Dive](https://github.com/ryudg/Study/tree/main/JavaScript/DeepDive)        | [자바스크립트<br> 완벽 가이드]()                                                                     |
+| :-----------------------------------------------------------------------------------------------------------: | ---------------------------------------------------------------------------------------------------- |
+| <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791158392239.jpg" width="150" height="200"/> | <img src="https://learning.oreilly.com/library/cover/9788966263462/250w/" width="150" height="200"/> |
 
 ## ![TypsScript](https://skillicons.dev/icons?i=ts) TypeScript
 
@@ -16,6 +16,6 @@
 
 ## ![React](https://skillicons.dev/icons?i=react) React
 
-|     [모던 리액트<br> Deep Dive](https://github.com/ryudg/Study/tree/main/React/DeepDive)      |
-| :-------------------------------------------------------------------------------------------: |
-| <img src="https://wikibook.co.kr/images/cover/l/9791158394646.jpg" width="150" height="200"/> |
+|             [모던 리액트<br> Deep Dive](https://github.com/ryudg/Study/tree/main/React/DeepDive)              |
+| :-----------------------------------------------------------------------------------------------------------: |
+| <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791158394646.jpg" width="150" height="200"/> |

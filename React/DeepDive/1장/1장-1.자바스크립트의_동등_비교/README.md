@@ -29,7 +29,7 @@
 **`undefined`**
 `undefined`는 선언한 후 값을 할당하지 않은 변수 또는 값이 주어지지 않은 인수에 자동으로 할당 되는 값.
 
-https://github.com/ryudg/Study/blob/665413d9303a4c85f209f03b7d93161bb243c9a1/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/01-1.undefined.js#L1-L9
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-01.undefined.js#L1-L9
 
 `undefined`는 오직 `undefined`만을 값으로 갖는다.
 다음에 설명할 `null` 또한 오직 `null`만을 값으로 갖는다. 그 밖의 타입은 가질 수 있는 값이 두 개 이상이다.
@@ -37,7 +37,7 @@ https://github.com/ryudg/Study/blob/665413d9303a4c85f209f03b7d93161bb243c9a1/Rea
 **`null`**
 `null`은 값이 없거나 비어 있음을 의미하는 원시 타입이다.
 
-https://github.com/ryudg/Study/blob/665413d9303a4c85f209f03b7d93161bb243c9a1/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/01-2.null.js#L1
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-02.null.js#L1
 
 `null`은 `typeof` 연산자로 타입을 확인하면 `object`로 나온다. 이는 자바스크립트의 오래된 버그로, `null`이 객체가 아님에도 객체로 인식되는 것이다.
 이후 `typeof null`을 `null`이라고 표현하고자 하는 시도가 있었으나 이전 코드에서 작동할 수 없는 호환성이 깨지는 변경 사항(breaking change)이므로 이전 버그를 그대로 유지하기로 결정되었다.
@@ -65,97 +65,37 @@ https://github.com/ryudg/Study/blob/665413d9303a4c85f209f03b7d93161bb243c9a1/Rea
 정수와 실수를 구분해 저장하는 다른 언어와는 달리 자바스크립트는 모든 숫자를 하나의 타입에 저장했었다.
 ECAMSCript 표준에 따르면 `-2^53 ~ 2^53` 범위의 숫자를 저장할 수 있다. 이후 `bigint`가 등장하기 전에 이 범위 이외의 값들은 다루기가 어려웠다.
 
-```js
-const a = 1;
-
-const maxInterger = Math.pow(2, 53);
-maxInterger - 1 === Number.MAX_SAFE_INTEGER; // true
-
-const minInterger = -(Math.pow(2, 53) - 1);
-minInterger === Number.MIN_SAFE_INTEGER; // true
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-03.number.js#L1-L7
 
 또한 2진수, 8진수, 16진수 등의 별도 데이터 타입을 제공하지 않으므로 각 진수별로 값을 표현해도 모두 10진수로 해석되어 동일한 값으로 표시된다.
 
-```js
-const 이진수_2 = 0b10; // 2진수(binary) 2
-이진수_2 == (2).toString(2); // true
-
-const 팔진수_8 = 0o10; // 8진수(octal) 8
-팔진수_8 == (8).toString(8); // true
-
-const 십육진수_16 = 0x10; // 16진수(hexadecimal) 16
-십육진수_16 == (16).toString(16); // true
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-04.number.js#L1-L8
 
 **`BigInt`**
 `number`가 다룰 수 있는 숫자 크기의 제한을 극복하기 위해 ES2020에서 새롭게 등장한 타입이며 최대 `2^53 - 1`을 저장할 수 있는 `number`의 한계를 넘어 더 큰 숫자를 저장할 수 있다.
 
-```js
-// 기존 number의 한계
-9007199254740992 === 9007199254740993; // 마지막 숫자가 다르지만 true가 나온다. 즉, 더 이상 다룰 수 없는 크기의 숫자이기 때문이다.
-
-const bigInt1 = 9007199254740995n;
-const bigInt2 = BigInt("9007199254740995");
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-05.bigint.js#L1-L5
 
 `BigInt`는 `number`와 다르게 `BigInt`끼리만 연산이 가능하다.
 
-```js
-const bigInt1 = 9007199254740995n;
-const bigInt2 = BigInt("9007199254740995");
-
-bigInt1 + bigInt2; // 18014398509481990n
-bigInt1 + 1; // TypeError: Cannot mix BigInt and other types, use explicit conversions
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-06.bigint.js#L1-L5
 
 **`String`**
 `string`은 텍스트 타입의 데이터를 저장하기 위해 사용한다. `string`은 `''`, `""`, ` `` `로 표현할 수 있다.
 
 백틱으로 표현하는 문자열은 작은따옴표, 큰따옴표와는 차이가 있다. 백틱을 사용해서 표현한 문자열을 템플릿 리터럴(template literal)이라고 부르며, 이 문자열은 여러 줄로 이뤄진 문자열을 표현할 수 있으며, 내부에 표현식을 넣을 수 있다.
 
-```js
-// '\n안녕하세요.\n'
-const longText = `
-  안녕하세요.
-`;
-
-// Uncaught SyntaxError: Invalid or unexpected token
-const wornText = "
-  안녕하세요.
-";
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-07.string.js#L1-L9
 
 자바스크립트 문자열의 특징 중 하나는 문자열이 원시 타입이며 변경 불가능한 값(immutable value)이라는 것이다. 즉, 한번 문자열이 생성되면 그 문자열을 변경할 수 없다는 것이다.
 
-```js
-const foo = "bar";
-
-console.log(foo[0]); // 'b'
-
-foo[0] = "c";
-
-console.log(foo); // 'bar'
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-08.string.js#L1-L7
 
 **`Symbol`**
 `Symbol`은 ES2015(ES6)에서 새롭게 등장한 원시 타입으로, 주로 이름의 충돌 위험이 없는 유일한 객체의 프로퍼티 키를 만들기 위해 사용한다.
 심벌은 심벌 함수를 이용해서만 만들 수 있다. 즉, 심벌을 생성하려면 반드시 `Symbol()`을 사용해야 한다.
 
-```js
-// 심벌은 유일한 값이므로 Symbol()을 호출할 때마다 새로운 값을 생성한다.
-// 즉, 함수 내부에 넘겨주는 값을 Symbol 생성에 영향을 주지 않는다.
-const symbol1 = Symbol("foo");
-const symbol2 = Symbol("foo");
-
-symbol1 === symbol2; // false
-
-// 동일한 값을 사용하기 위해서는 Symbol.for()를 사용한다.
-const symbol3 = Symbol.for("foo");
-const symbol4 = Symbol.for("foo");
-
-symbol3 === symbol4; // true
-```
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-09.symbol.js#L1-L12
 
 ### 1.1.2 객체 타입
 
@@ -163,4 +103,24 @@ symbol3 === symbol4; // true
 
 객체 타입은(object type)은 참조를 전달하고 해서 참조 타입(reference type)이라고도 부른다.
 
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-10.obect.js#L1-L10
+
 ## 1.2 값을 저장하는 방식의 차이
+
+원시 타입과 객체 타입의 가장 큰 차이점은, 바로 값을 저장하는 방식의 차이다. 값을 저장하는 방식의 차이가 동등 비교를 할 때 차이를 만드는 원인이다.
+
+먼저 원시 타입은 불변 형태의 값으로 저장된다. 그리고 이 값은 변수 할당 시점에 메모리 영역을 차지하고 저장된다.
+
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-11.value.js#L1-L4
+
+당연히 두 값을 비교하면 `true`가 나온다. 이는 `hello`의 `hello world`라는 값이 `hi`에 복사해 전달되었기 때문이다.
+값을 비교하기 때문에, 값을 전달하는 방식이 아닌 각각 선언하는 방식으로도 동일한 결과를 볼 수 있다.
+
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-12.value.js#L1-L4
+
+반면 객체는 프로퍼티를 삭제, 추가, 수정할 수 있으므로 원시 갑과 다르게 변경 가능한 형태로 저장되며, 값을 복사할 때도 값이 아닌 참조를 전달하게 된다.
+
+https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-13.value.js#L1-L14
+
+객체는 값을 저장하는 게 아니라 참조를 저장하기 때문에 앞서 동일하게 선언했던 객체라 하더라도 저장하는 순간 다른 참조를 바라보기 때문에 `false`를 반환한다.
+즉, 값은 같았을지라도 참조하는 곳이 다른 셈이다. 반면 참조를 전달하는 경우에는 이전에 원시값에서 했던 것과 같은 결과를 기대할 수 있다.

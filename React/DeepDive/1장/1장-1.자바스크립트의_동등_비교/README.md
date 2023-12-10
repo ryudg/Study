@@ -29,17 +29,15 @@
 **`undefined`**
 `undefined`는 선언한 후 값을 할당하지 않은 변수 또는 값이 주어지지 않은 인수에 자동으로 할당 되는 값.
 
+https://github.com/ryudg/Study/blob/665413d9303a4c85f209f03b7d93161bb243c9a1/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/01-1.undefined.js#L1-L9
+
+https://github.com/ryudg/Study/blob/main/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/01-1.undefined.js#L1-L9
+
 ```js
-let foo;
-
-typeof foo; // 'undefined'
-
-function bar(hello) {
-  return hello;
-}
-
-bar(); // undefined
+${require('fs').readFileSync('./01-1.undefined.js', 'utf8')}
 ```
+
+[See the code here](./01-1.undefined.js)
 
 `undefined`는 오직 `undefined`만을 값으로 갖는다.
 다음에 설명할 `null` 또한 오직 `null`만을 값으로 갖는다. 그 밖의 타입은 가질 수 있는 값이 두 개 이상이다.

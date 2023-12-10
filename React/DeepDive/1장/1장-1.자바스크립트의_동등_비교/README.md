@@ -124,3 +124,19 @@ https://github.com/ryudg/Study/blob/07c92007a324928e5c59ac3159b4382ee229c450/Rea
 
 객체는 값을 저장하는 게 아니라 참조를 저장하기 때문에 앞서 동일하게 선언했던 객체라 하더라도 저장하는 순간 다른 참조를 바라보기 때문에 `false`를 반환한다.
 즉, 값은 같았을지라도 참조하는 곳이 다른 셈이다. 반면 참조를 전달하는 경우에는 이전에 원시값에서 했던 것과 같은 결과를 기대할 수 있다.
+
+아래 예제에서는 `hello`와 `hi` 변수는 변수명 및 각 변수명의 주소가 서로 다르지만 `value`가 가리키는 주소가 동일하다.
+즉, `value`의 값(`{greet: 'hello, world'}`)이 `hello.greet = "something"`과 같이 변경된다 하더라도 `hi`와 `hello` 비교는 언제나 `true`를 반환한다.
+
+https://github.com/ryudg/Study/blob/7ba4b914159137bc80fd8327ae0f493be3c1b2c7/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-14.value.js#L1-L7
+
+따라서 자바스크립트 개발자는 항상 객체 간에 비교가 발생하면, 이 객체 간의 비교는 우리가 이해하는 내부의 값이 같다 하더라도 결과는 대부분 true가 아닐 수 있다는 것을 인지해야한다.
+
+## 1.3 `Object.is`
+
+자바스크립트는 비교를 위한 메서드를 제공한다. 그 중 `Object.is`는 두 값을 비교할 때 사용하는 메서드다.
+`Object.is`는 두 개의 인수를 받으며, 이 인수 두 개가 동일한지 확인하고 반환하는 메서드다. `Object.is`가 `==`나 `===`와 다른 점은 아래와 같다.
+
+1. `==` vs `Object.is`: `==`는 두 값이 동일한지 확인하기 위해 암묵적 타입 변환을 하지만, `Object.is`는 암묵적 타입 변환을 하지 않는다.
+2. `===` vs `Object.is`: `===`는 `+0`과 `-0`을 같다고 평가하지만, `Object.is`는 `+0`과 `-0`을 다르다고 평가한다.
+   https://github.com/ryudg/Study/blob/7ba4b914159137bc80fd8327ae0f493be3c1b2c7/React/DeepDive/1%EC%9E%A5/1%EC%9E%A5-1.%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98_%EB%8F%99%EB%93%B1_%EB%B9%84%EA%B5%90/code/01-15.ObjectIs.js#L1-L8

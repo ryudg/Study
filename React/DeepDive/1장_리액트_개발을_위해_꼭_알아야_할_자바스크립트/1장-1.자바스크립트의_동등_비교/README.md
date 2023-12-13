@@ -102,7 +102,7 @@ ECAMSCript 표준에 따르면 `-2^53 ~ 2^53` 범위의 숫자를 저장할 수 
 객체는 값을 저장하는 게 아니라 참조를 저장하기 때문에 앞서 동일하게 선언했던 객체라 하더라도 저장하는 순간 다른 참조를 바라보기 때문에 `false`를 반환한다.
 즉, 값은 같았을지라도 참조하는 곳이 다른 셈이다. 반면 참조를 전달하는 경우에는 이전에 원시값에서 했던 것과 같은 결과를 기대할 수 있다.
 
-따라서 자바스크립트 개발자는 항상 객체 간에 비교가 발생하면, 이 객체 간의 비교는 우리가 이해하는 내부의 값이 같다 하더라도 결과는 대부분 true가 아닐 수 있다는 것을 인지해야한다.
+따라서 자바스크립트 개발자는 항상 객체 간에 비교가 발생하면, 이 객체 간의 비교는 우리가 이해하는 내부의 값이 같다 하더라도 결과는 대부분 `true`가 아닐 수 있다는 것을 인지해야한다.
 
 ## 1.3 `Object.is`
 
@@ -111,3 +111,129 @@ ECAMSCript 표준에 따르면 `-2^53 ~ 2^53` 범위의 숫자를 저장할 수 
 
 1. `==` vs `Object.is`: `==`는 두 값이 동일한지 확인하기 위해 암묵적 타입 변환을 하지만, `Object.is`는 암묵적 타입 변환을 하지 않는다.
 2. `===` vs `Object.is`: `===`는 `+0`과 `-0`을 같다고 평가하지만, `Object.is`는 `+0`과 `-0`을 다르다고 평가한다.
+
+한 가지 주의해야 할 점은 `Object.is`를 사용한다 해도 객체 비교에는 별 차이가 없다는 점이다.
+
+## 1.4 리액트에서 동등 비교
+
+리액트에서 사용하는 동등 비교는 `==`, `===`가 아닌 `Object.is`를 사용한다.
+
+```typescript
+/**
+ * Object.is 메서드를 사용하고자 하는데, 만약 환경이나 브라우저에서 이 메서드가 지원되지 않는 경우를 대비하여 직접 폴리필을 제공한다.
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x: any, y: any) {
+  return (
+    (x === y && (x !== 0 || 1 / x === 1 / y)) || (x !== x && y !== y) // eslint-disable-line no-self-compare
+  );
+}
+
+const objectIs: (x: any, y: any) => boolean =
+  // $FlowFixMe[method-unbinding]
+  typeof Object.is === "function" ? Object.is : is;
+
+export default objectIs;
+```
+
+> - [Mdn - Object.is()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/is)
+> - [React - objectIs](https://github.com/facebook/react/blob/493610f299ddf7d06e147e60dc4f2b97482982d2/packages/shared/objectIs.js#L1-L24)
+> - [React - shallowEqual](https://github.com/facebook/react/blob/493610f299ddf7d06e147e60dc4f2b97482982d2/packages/shared/shallowEqual.js#L1-L54) -> 리액트에서는 objectIs를 기반으로 동등 비교를 하는 `shallowEqual`이라는 함수를 만들어 사용한다.
+>   - 의존성 비교 등 리액트의 동등 비교가 필요한 다양한 곳에서 사용된다.
+
+리액트에서 비교는 `Object.is`로 먼저 비교를 수행한 뒤 `Object.is`에서 수행하지 못하는 비교, 즉 객체 간 얕은 비교를 한 번 더 수행한다.
+
+> 객체간 얕은 비교란 객체의 첫 번째 깊이에 존재하는 값만 비교하는 것을 말한다.
+
+```js
+// Object.is는 참조가 다른 객체에 대해 비교가 불가능하다.
+Object.is({ hello: "world" }, { hello: "world" }); // false
+
+// 리액트에서 구현한 shallowEqual은 객체의 첫 번째 깊이에 존재하는 값만 비교한다.
+shallowEqual({ hello: "world" }, { hello: "world" }); // true
+
+// 그러나 두 번째 깊이 이상에 존재하는 값은 비교하지 않는다.
+shallowEqual({ hello: { world: "world" } }, { hello: { world: "world" } }); // false
+```
+
+리액트에서 사용하는 JSX props는 객체이며 해당하는 객체만 일차적으로 비교한다.
+
+```tsx
+type Props = {
+  hello: string;
+};
+
+// props는 객체이며, props에서 꺼내온 값을 기준으로 렌더링을 수행한다. 따라서 얕은 비교로도 충분하다.
+function Component(props: Props) {
+  return <div>{props.hello}</div>;
+}
+
+function App() {
+  return <Component hello="hello" />;
+}
+```
+
+만약 `props`에 또 다른 객체를 넘겨준다면 리액트 렌더링이 예상치 못하게 작동한다.
+
+```tsx
+import { memo, useEffect, useState } from "react";
+
+type Props = {
+  counter: number;
+};
+
+const Component = memo((props: Props) => {
+  useEffect(() => {
+    console.log("렌더링이 되었습니다.");
+  });
+
+  return <div>{props.counter}</div>;
+});
+
+type DeepProps = {
+  counter: {
+    counter: number;
+  };
+};
+
+const DeepComponent = memo((props: DeepProps) => {
+  useEffect(() => {
+    console.log("렌더링이 되었습니다.");
+  });
+
+  return <div>{props.counter.counter}</div>;
+});
+
+export default function App() {
+  const [, setCounter] = useState(0);
+
+  const handleCounter = () => {
+    setCounter((prev) => prev + 1);
+  };
+
+  return (
+    <>
+      <div className="App">
+        <Component counter={1} />
+        <DeepComponent counter={{ counter: 1 }} />
+        <button onClick={handleCounter}>counter</button>
+      </div>
+    </>
+  );
+}
+```
+
+위 코드와 같이 `props`가 깊어지는 경우(객체 안에 또 다른 객체가 있을 경우) `React.memo`는 컴포넌트에 실제로 변경된 값이 없음에도 불구하고 메모이제이션된 컴포넌트를 반환하지 못한다.
+즉, `Component`는 `pops.counter`가 존재하지만, `DeepComponent는 `props.counter.counter`에 `props`가 존재한다.
+상위 컴ㅁ포넌트인 `App`에서 버튼을 클릭해 렌더링을 일으킬 경우 `shallowEqual`을 사용하는 `Componenet`함수는 정확히 객체 간 비교를 수행해서 렌더링을 방지해 주지만,`DeepComponent`는 제대로 비교하지 못해 `memo`가 제대로 작동하지 않는다.
+
+만약 내부의 객체까지 완벽하게 비교하기 위해 재귀문까지 넣었더라면 성능상의 문제가 발생할 수 있다.
+
+## 1.5 요약
+
+- 자바스크립트에서 데이터 타입이란?
+  - 7가지 원시 타입(`number`, `string`, `boolean`, `null`, `undefined`, `symbol`, `bigint`)과 객체 타입(`object`)으로 나뉜다.
+  - 원시 타입은 불변 형태의 값으로 저장되며, 객체 타입은 변경 가능한 값으로 저장된다.
+  - 원시 타입은 값 자체를 비교하고, 객체 타입은 참조를 비교한다.
+  - 따라서, 객체 타입은 동등 비교를 할 때 `Object.is`를 사용한다.
+- 자바스크립트에서 객체 비교의 불완전성 때문에 리액트의 함수형 프로그래밍 모델에서 언어적인 한계를 뛰어넘을 수 없으므로 얕은 비교만 사용해 비교를 수행한다.

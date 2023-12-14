@@ -55,23 +55,28 @@ console.log(dog.nickname); // 바둑이
 ```
 
 **`constructor`**
+
 `constructor`는 생성자로, 객체를 생성하는 특수한 메서드다. 단 하나만 존재할 수 있으며, 여러 개의 생성자를 만들면 에러가 발생한다. 생성자에서 수행할 작업이 없다면 생략할 수 있다.
 
 **`property`**
+
 `property`란 클래스로 인스턴스를 생성할 때 내부에 정의할 수 있는 속성값을 의미한다.
 인스턴스 생성 시 `constructor` 내부에는 빈 객체가 할당되어 있는데, 이 객체의 `property`의 키와 값을 넣어 사용한다.
 
 **`getter` & `settet`**
+
 `getter`는 클래스에서 값을 가져올 때 사용하며 `getter`을 사용하기 위해서는 `get` 키워드를 붙이고 `getter`의 이름을 선언한다.
 반대로 `setter`는 값을 설정할 때 사용하며 `setter`를 사용하기 위해서는 `set` 키워드를 붙이고 `setter`의 이름을 선언한다.
 
 **instance method**
+
 인스턴스 메서드는 클래스 내부에서 선언한 메서드를 의미한다. 실제 자바스크립트의 prototype에 선언되므로 프로토타입 메서드라고도 한다.
 위의 `Dog` 예제에서 `bark` 메서드가 이에 해당하며,
 `Object.getPrototypeOf(dog)`를 실행하면 `{constructor: ƒ, bark: ƒ}`와 같이 `bark` 메서드가 프로토타입에 선언되어 있는 것을 확인할 수 있고, `{constructor: ƒ, bark: ƒ}`를 반환받아 `Dog`의 `prototype`을 받은 것으로 이해할 수 있다.
 또한 이를 확인해보기 위해 `Object.getPrototypeOf(Dog) === Dog.prototype`를 실행하면 `true`를 반환받는다.
 
 **static method**
+
 정적 메서드는 클래스의 인스턴스가 아닌 이름으로 호출할 수 있는 메서드를 의미한다. 클래스 내부에서 `static` 키워드를 붙여 선언한다.
 위의 `Dog` 예제에서 `info` 메서드가 이에 해당하며, `Dog.info()`와 같이 호출할 수 있다.
 
@@ -79,6 +84,7 @@ console.log(dog.nickname); // 바둑이
 정적 메서드는 비록 `this`에 접근할 수는 없지만, 인스턴스를 생성하지 않아도 사용할 수 있다는 점과 생성하지 않아도 접근할 수 있기에 객체럴 생성하지 않아도 여러 곳에서 재사용할 수 있다는 장점이 있다.
 
 **상속(Inheritance)**
+
 리액트에서 클래스형 컴포넌트를 만들기 위해 `extends React.Component` 또는 `extends React.PureComponent`를 사용하는데 이 `extends`는 기존 클래스를 상속받아 자식 클래스에서 상속받은 클래스를 확장하는 개념이다.
 상속을 사용하면 기존 클래스의 모든 기능을 그대로 사용할 수 있으면서 새로운 기능을 추가할 수 있다.
 

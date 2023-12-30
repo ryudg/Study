@@ -389,8 +389,6 @@ type WrittenArt = Artwork & Writing; // 타입은 { genre: string; name: string;
 교차 타입은 잘못 사용하기 쉽고 불가능한 타입을 생성한다. 원시 타입의 값은 동시에 여러 타입이 될 수 없기 때문에 교차 타입의 구성 요소로 함께 결합할 수 없다. 두 개의 원시 타입을 함께 시도하면 `never` 키워드로 표시되는 `never` 타입이 된다.
 
 ```tsx
-// 4.Object/08-4.intersection.ts
-
 type NotPossible = number & string; // 타입은 never
 ```
 

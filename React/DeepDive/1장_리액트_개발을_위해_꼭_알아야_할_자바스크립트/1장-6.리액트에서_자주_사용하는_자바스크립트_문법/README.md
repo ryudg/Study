@@ -91,6 +91,10 @@ console.log(first, second, rest); // 1, 2, [3, 4, 5]
 
 **트랜스파일된 배열 구조 분해 할당**
 
+<details>
+
+<summary>예시</summary>
+
 - 트랜스파일 전
 
 ```jsx
@@ -107,6 +111,8 @@ var first = array[0],
   third = array[2],
   arrayRest = array.slice(3);
 ```
+
+</details>
 
 ### 6.1.2 객체의 구조 분해 할당
 
@@ -215,6 +221,10 @@ console.log(a, b, objectRest); // 1, 2, { c: 3, d: 4, e: 5 }
 
 **트랜스파일된 객체 구조 분해 할당**
 
+<details>
+
+<summary>예시</summary>
+
 - 트랜스파일 전
 
 ```jsx
@@ -262,9 +272,13 @@ var a = object.a,
   objectRest = _objectWithoutProperties(object, ["a", "b"]);
 ```
 
-배열과 달리 객체의 구조 분해 할당을 트랜스파일할 경우 복잡한 코드가 생성된다.
 `_objectWithoutProperties`는 객체와 해당 객체에서 제외할 키가 포함된 배열 두 가지를 인수로 받고, 이 두가지 값을 활용해 해당 객체에서 특정 키를 제외한다.
+
 `_objectWithoutPropertiesLoose` 함수는 `Object.getOwnPropertySymbols`가 존재하는 환경인 경우(객체 내부에서 심벌의 존재를 확인할 수 있는 경우)를 대비해 이에 대한 예외 처리를 해준다.
+
+</details>
+
+배열과 달리 객체의 구조 분해 할당을 트랜스파일할 경우 복잡한 코드가 생성된다.
 
 이처럼 객체 구조 분해 할당의 경우 트랜스파일을 거치면 번들링 크기가 상대적으로 크기 때문에 개발 환경이 ES5를 고려해야하고, 객체 구조 분해 할당을 자주 사용하지 않는다면 반드시 사용할 필요는 없다.
 
@@ -274,3 +288,184 @@ ex. `lodash`의 `omit` 함수, `ramda`의 `omit` 함수 등
 ## 6.2 전개 구문
 
 전개 구문(Spread syntax)은 구조 분해 할당과는 달리 배열이나 객체, 문자열과 같이 순회할 수 있는 값에 대해 그대로 전개해 간결하게 사용할 수 있는 구문이다.
+
+> 배열 전개 구문은 ES2015에서, 객체의 전개 구문은 ES2018에서 도입되었다.
+
+### 6.2.1 배열의 전개 구문
+
+과거에는 배열 간 합성을 위해서 `push()`, `concat{}`, `splice()` 등의 메서드를 사용했다. 하지만 전개 구문을 사용하면 이러한 메서드를 사용하지 않고도 간결하게 배열을 합성할 수 있다.
+
+<details>
+
+<summary>예시</summary>
+
+```js
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5, 6]; // [1, 2, 3, 4, 5, 6]
+```
+
+</details>
+
+**전개 구문을 사용한 배열 복사**
+
+배열 내부에서 `...arr`을 사용하면 해당 배열을 전개하는 것처럼 선언하고, 이를 내부 배열에서 활용해 기존 배열에 영향을 미치지 않고 새로운 배열을 복사할 수 있다.
+
+<details>
+
+<summary>예시</summary>
+
+```js
+const arr1 = [1, 2, 3];
+const arr2 = arr1;
+
+arr1 === arr2; // true, 내용이 아닌 참조를 복사하기 때문에
+
+const arr3 = [4, 5, 6];
+const arr4 = [...arr3];
+
+arr3 === arr4; // false, 전개 구문을 활용해 실제 값만 복했기 때문에
+```
+
+</details>
+
+**트랜스파일된 배열 전개 구문**
+
+<details>
+
+<summary>예시</summary>
+
+- 트랜스파일 전
+
+```jsx
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5, 6];
+```
+
+- 트랜스파일 후
+
+```jsx
+var arr1 = [1, 2, 3];
+var arr2 = [].concat(arr1, [4, 5, 6]);
+```
+
+</details>
+
+### 6.2.2 객체의 전개 구문
+
+객체에서도 배열과 비슷하게 전개 구문을 사용 가능하다.
+
+<details>
+
+<summary>예시</summary>
+
+```js
+const obj1 = { a: 1, b: 2 };
+
+const obj2 = { c: 3, d: 4 };
+
+const newObj = { ...obj1, ...obj2 }; // { "a": 1, "b": 2, "c": 3, "d": 4 }
+```
+
+</details>
+
+한 가지 중요한 것은 **객체 전개 구문에 있어 순서가 중요하다는 것**이다.
+
+전개 구문 이후에 값 할당이 있다면 전개 구문이 할당한 값을 덮어 쓰지만, 반대의 경우 오히려 전개 구문이 해당 값을 덮어쓴다. 즉, 전개 구문에 있는 값을 덮어쓸 것인지, 혹은 그 값을 받아들일 것인지는 순서에 따라 달라진다.
+
+<details>
+
+<summary>예시</summary>
+
+```js
+const obj = { a: 1, b: 2, c: 3 };
+
+const newObj = { ...obj, c: 9 }; // { "a": 4, "b": 2, "c": 9 }
+
+const newObj2 = { c: 9, ...obj }; // { "c": 9, "a": 4, "b": 2 }
+```
+
+</details>
+
+**트랜스파일된 객체 전개 구문**
+
+<details>
+
+<summary>예시</summary>
+
+- 트랜스파일 전
+
+```jsx
+const obj1 = { a: 1, b: 2 };
+
+const obj2 = { c: 3, d: 4 };
+
+const newObj = { ...obj1, ...obj2 };
+```
+
+- 트랜스파일 후
+
+```jsx
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly &&
+      (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })),
+      keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2
+      ? ownKeys(Object(source), !0).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        })
+      : Object.getOwnPropertyDescriptors
+      ? Object.defineProperties(
+          target,
+          Object.getOwnPropertyDescriptors(source)
+        )
+      : ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(
+            target,
+            key,
+            Object.getOwnPropertyDescriptor(source, key)
+          );
+        });
+  }
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var obj1 = { a: 1, b: 2 };
+var obj2 = { c: 3, d: 4 };
+
+var newObj = _objectSpread(_objectSpread({}, obj1), obj2);
+```
+
+</details>
+
+객체 분해 할당을 트랜스파일한 결과와 비슷한 차이가 나온다. 단순한 값을 복사하는 배열과는 다르게 객체의 경우 객체의 속성값 및 설명자 확인, 심벌 체크 등 때문에 트랜스파일된 코드가 커지는 것을 볼 수 있다.
+
+객체 구조 분해 할당과 마찬가지로, 객체 전개 연산자 또한 트랜스파일되면 상대적으로 번들링이 커지기 때문에 주의해야 한다.
+
+## 6.3 객체 초기자

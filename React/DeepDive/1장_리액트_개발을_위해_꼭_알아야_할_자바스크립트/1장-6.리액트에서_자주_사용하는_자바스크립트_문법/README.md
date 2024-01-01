@@ -16,7 +16,7 @@
 ### 6.1.1 배열의 구조 분해 할당
 
 <details>
-<summary>배열의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const array = [1, 2, 3, 4, 5];
@@ -36,7 +36,7 @@ const [first, second, third, ...rest] = array;
 배열의 구조 분해 할당은 `,` 위치에 따라 값이 결졍된다. 따라서 중간 인덱스에 대한 할당을 생략하고 싶다면 `,`를 사용하면 된다.
 
 <details>
-<summary><code>,</code>를 사용한 배열의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const array = [1, 2, 3, 4, 5];
@@ -57,7 +57,7 @@ console.log(first, fifth); // 1, 5
 
 <details>
 
-<summary>기본값을 사용한 배열의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const array = [0, null, undefined, "", 5];
@@ -77,7 +77,7 @@ console.log(first, second, third, fourth, fifth, sixth); // 0, null, 9, "", 5, 9
 
 <details>
 
-<summary>전개 연산자를 사용한 배열의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const array = [1, 2, 3, 4, 5];
@@ -90,10 +90,6 @@ console.log(first, second, rest); // 1, 2, [3, 4, 5]
 </details>
 
 **트랜스파일된 배열 구조 분해 할당**
-
-<details>
-
-<summary>트랜스파일된 배열 구조 분해 할당 예시</summary>
 
 - 트랜스파일 전
 
@@ -112,15 +108,13 @@ var first = array[0],
   arrayRest = array.slice(3);
 ```
 
-</details>
-
 ### 6.1.2 객체의 구조 분해 할당
 
 객체 구조 분해 할당은 객체에서 값을 꺼내온 뒤 할당하는 것을 의미한다. 배열 구조 분해 할당과 달리, 객체는 객체 내부 이름으로 꺼내온다.
 
 <details>
 
-<summary>객체의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const object = { a: 1, b: 2, c: 3, d: 4, e: 5 };
@@ -138,7 +132,7 @@ console.log(a, b, c, objectRest); // 1, 2, 3, { d: 4, e: 5 }
 
 <details>
 
-<summary>새로운 이름으로 재할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const object = { a: 1, b: 2 };
@@ -156,7 +150,7 @@ console.log(newA, newB); // 1, 2
 
 <details>
 
-<summary>기본값을 사용한 객체의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const object = { a: 1, b: 2 };
@@ -184,7 +178,7 @@ console.log(a, b, c); // 1, 2, 9
 
 <details>
 
-<summary>계산된 속성 이름을 사용한 객체의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const key = "a";
@@ -207,7 +201,7 @@ console.log(a); // 1
 
 <details>
 
-<summary>전개 연산자를 사용한 객체의 구조 분해 할당 예시</summary>
+<summary>예시</summary>
 
 ```jsx
 const object = { a: 1, b: 2, c: 3, d: 4, e: 5 };
@@ -220,10 +214,6 @@ console.log(a, b, objectRest); // 1, 2, { c: 3, d: 4, e: 5 }
 </details>
 
 **트랜스파일된 객체 구조 분해 할당**
-
-<details>
-
-<summary>트랜스파일된 객체 구조 분해 할당 예시</summary>
 
 - 트랜스파일 전
 
@@ -275,8 +265,6 @@ var a = object.a,
 배열과 달리 객체의 구조 분해 할당을 트랜스파일할 경우 복잡한 코드가 생성된다.
 `_objectWithoutProperties`는 객체와 해당 객체에서 제외할 키가 포함된 배열 두 가지를 인수로 받고, 이 두가지 값을 활용해 해당 객체에서 특정 키를 제외한다.
 `_objectWithoutPropertiesLoose` 함수는 `Object.getOwnPropertySymbols`가 존재하는 환경인 경우(객체 내부에서 심벌의 존재를 확인할 수 있는 경우)를 대비해 이에 대한 예외 처리를 해준다.
-
-</details>
 
 이처럼 객체 구조 분해 할당의 경우 트랜스파일을 거치면 번들링 크기가 상대적으로 크기 때문에 개발 환경이 ES5를 고려해야하고, 객체 구조 분해 할당을 자주 사용하지 않는다면 반드시 사용할 필요는 없다.
 

@@ -1,6 +1,6 @@
 # 📖 학습 저장소
 
-읽은 기술 문서와 기술 서적들을 기록하고 정리하는 학습 저장소입니다.
+기록하고 정리하는 학습 저장소입니다.
 
 ## ![JavaScript](https://skillicons.dev/icons?i=js) JavaScript
 

@@ -28,6 +28,7 @@ const [first, second, third, ...rest] = array;
 </details>
 
 리액트의 `useState` 함수는 2개 짜리 배열을 반환하는 함수며, 첫 번째 값을 Value로, 두 번째 값을 Setter로 사용한다.
+
 `useState`가 객체가 아닌 배열을 반환하는 이유는, 객체 구조 분해 할당에서는 사용하는 쪽에서 원하는 이름으로 변경하기 번거롭기 떄문이다. 따라서 자유롭게 이름을 선언할 수 있는 배열을 반환하는 것이라고 추측할 수 있다.
 
 **`,` 를 사용한 배열의 구조 분해 할당**
@@ -111,4 +112,177 @@ var first = array[0],
   arrayRest = array.slice(3);
 ```
 
+</details>
+
 ### 6.1.2 객체의 구조 분해 할당
+
+객체 구조 분해 할당은 객체에서 값을 꺼내온 뒤 할당하는 것을 의미한다. 배열 구조 분해 할당과 달리, 객체는 객체 내부 이름으로 꺼내온다.
+
+<details>
+
+<summary>객체의 구조 분해 할당 예시</summary>
+
+```jsx
+const object = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+
+const { a, b, c, ...objectRest } = object;
+
+console.log(a, b, c, objectRest); // 1, 2, 3, { d: 4, e: 5 }
+```
+
+</details>
+
+**새로운 이름으로 재할당**
+
+객체 구조 분해 할당은 객체 내부의 키 이름과 다른 이름으로 할당할 수 있다.
+
+<details>
+
+<summary>새로운 이름으로 재할당 예시</summary>
+
+```jsx
+const object = { a: 1, b: 2 };
+
+const { a: newA, b: newB } = object;
+
+console.log(newA, newB); // 1, 2
+```
+
+</details>
+
+**기본값을 사용한 객체의 구조 분해 할당**
+
+배열 구조 분해 할당과 마찬가지로 객체 구조 분해 할당에도 기본값을 지정할 수 있다.
+
+<details>
+
+<summary>기본값을 사용한 객체의 구조 분해 할당 예시</summary>
+
+```jsx
+const object = { a: 1, b: 2 };
+
+const { a = 9, b = 9, c = 9 } = object;
+
+console.log(a, b, c); // 1, 2, 9
+```
+
+</details>
+
+> 이 방식은 리액트 컴포넌트에서 `props`를 전달받을 때 주로 사용된다.
+>
+> ```jsx
+> function Component({ a, b }) {
+>   retrun <span>{a}, {b}</span>;
+> }
+>
+> Component({ a: "Some", b: "Thing" }); // <span>Some, Thing</span>
+> ```
+
+**계산된 속성 이름(computed property name)을 사용한 객체의 구조 분해 할당**
+
+단순히 값을 꺼내오는 것뿐만 아니라 변수에 있는 값으로 꺼내오는 것도 가능하다.
+
+<details>
+
+<summary>계산된 속성 이름을 사용한 객체의 구조 분해 할당 예시</summary>
+
+```jsx
+const key = "a";
+const object = { a: 1, b: 2 };
+
+const { [key]: a } = object;
+
+console.log(a); // 1
+```
+
+`key`라는 `"a"` 값은 `object`에서 `"a"`라는 값을 꺼내오기 위해 `[key]` 문법을 사용했다.
+이러한 계산된 속성 이름을 사용하기 위해서는 반드시 이름을 선언하는 `: a`와 같은 변수 네이밍이 필요하다.
+그렇지 않으면 에러가 발생한다. `const {[key]} = object; // Uncaught SyntaxError: Unexpected token '['`
+
+</details>
+
+**전개 연산자를 사용한 객체의 구조 분해 할당**
+
+배열 구조 분해 할당과 마찬가지로 전개 연산자를 사용해 나머지 값을 모두 가져올 수 있다.
+
+<details>
+
+<summary>전개 연산자를 사용한 객체의 구조 분해 할당 예시</summary>
+
+```jsx
+const object = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+
+const { a, b, ...objectRest } = object;
+
+console.log(a, b, objectRest); // 1, 2, { c: 3, d: 4, e: 5 }
+```
+
+</details>
+
+**트랜스파일된 객체 구조 분해 할당**
+
+<details>
+
+<summary>트랜스파일된 객체 구조 분해 할당 예시</summary>
+
+- 트랜스파일 전
+
+```jsx
+const object = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+
+const { a, b, ...objectRest } = object;
+```
+
+- 트랜스파일 후
+
+```jsx
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = _objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+
+var object = { a: 1, b: 2, c: 3, d: 4, e: 5 };
+
+var a = object.a,
+  b = object.b,
+  objectRest = _objectWithoutProperties(object, ["a", "b"]);
+```
+
+배열과 달리 객체의 구조 분해 할당을 트랜스파일할 경우 복잡한 코드가 생성된다.
+`_objectWithoutProperties`는 객체와 해당 객체에서 제외할 키가 포함된 배열 두 가지를 인수로 받고, 이 두가지 값을 활용해 해당 객체에서 특정 키를 제외한다.
+`_objectWithoutPropertiesLoose` 함수는 `Object.getOwnPropertySymbols`가 존재하는 환경인 경우(객체 내부에서 심벌의 존재를 확인할 수 있는 경우)를 대비해 이에 대한 예외 처리를 해준다.
+
+</details>
+
+이처럼 객체 구조 분해 할당의 경우 트랜스파일을 거치면 번들링 크기가 상대적으로 크기 때문에 개발 환경이 ES5를 고려해야하고, 객체 구조 분해 할당을 자주 사용하지 않는다면 반드시 사용할 필요는 없다.
+
+만약 트랜스파일은 부담스럽지만 객체 구조 객체 구조 분해 할당을 통한 `...rest`와 같은 함수가 필요하다면 외부 라이브러리를 사용해 보는 것도 좋은 방법이다.
+ex. `lodash`의 `omit` 함수, `ramda`의 `omit` 함수 등
+
+## 6.2 전개 구문
+
+전개 구문(Spread syntax)은 구조 분해 할당과는 달리 배열이나 객체, 문자열과 같이 순회할 수 있는 값에 대해 그대로 전개해 간결하게 사용할 수 있는 구문이다.

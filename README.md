@@ -19,3 +19,9 @@
 |             [모던 리액트<br> Deep Dive](https://github.com/ryudg/Study/tree/main/React/DeepDive)              |
 | :-----------------------------------------------------------------------------------------------------------: |
 | <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791158394646.jpg" width="150" height="200"/> |
+
+## [Testing](https://github.com/ryudg/Study/tree/main/Test)
+
+|        [Jest](https://github.com/ryudg/Study/tree/main/Test/Jest)         |        [Cypress](https://github.com/ryudg/Study/tree/main/Test/Cypress)         |
+| :-----------------------------------------------------------------------: | :-----------------------------------------------------------------------------: |
+| <img src="https://skillicons.dev/icons?i=jest" width="150" height="200"/> | <img src="https://simpleicons.org/icons/cypress.svg" width="150" height="200"/> |

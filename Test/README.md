@@ -105,3 +105,123 @@ TDD는 짧은 개발 주기의 반복에 의존하는 개발 프로세스로, �
     - 테스트 코드를 작성하는 시간이 추가되기 때문에 생산성이 저하될 수 있다.
   - 러닝 커브
     - TDD를 처음 접하는 개발자는 테스트 코드를 작성하는 데 시간이 오래 걸릴 수 있다.
+
+### 공통 문법
+
+#### `test`, `it`
+
+- 실제 테스트 코드를 작성하는 함수이며, 하나의 테스트 케이스를 작성한다.
+- `it`은 `test`의 alias이며, 주로 한글로 작성할 때는 `test`, 영어로 작성할 때는 `it`을 사용한다.
+
+#### `describe`
+
+- `test` 혹은 `it`을 그룹화하는 함수이다. 관련있는 테스트들을 묶어 응집도를 높이고, 테스트 코드의 가독성을 높일 수 있다.
+
+#### `beforeEach`
+
+- `describe` 블록 안에 있는 **각각의** `test` 혹은 `it`을 실행하기 전에 실행되는 함수이다.
+- 테스트 환경이나 테스트 케이스를 설정하는데 주로 사용된다.
+
+#### `beforeAll`
+
+- `describe` 블록 안에 있는 **모든** `test` 혹은 `it`을 실행하기 전에 실행되는 함수이다.
+- 테스트들이 공통으로 사용하는 configuration이나 상수들을 설정하는데 주로 사용된다.
+
+#### `afterEach`
+
+- `describe` 블록 안에 있는 **각각의** `test` 혹은 `it`을 실행한 후에 실행되는 함수이다.
+- configuration을 초기화하거나, mock data를 clean up하는데 주로 사용된다.
+
+#### `afterAll`
+
+- `describe` 블록 안에 있는 **모든** `test` 혹은 `it`을 실행한 후에 실행되는 함수이다.
+- 여러 개의 `describe`에 공통으로 사용되는 것들을 초기화하는데 주로 사용된다.
+
+#### 예시
+
+```js
+describe("회원가입 테스트", () => {
+  beforeAll(() => {
+    console.log("beforeAll");
+  });
+
+  beforeEach(() => {
+    console.log("beforeEach");
+  });
+
+  test("회원가입 성공", () => {
+    console.log("회원가입 성공");
+  });
+
+  it("signup fail", () => {
+    console.log("signup success");
+  });
+
+  afterEach(() => {
+    console.log("afterEach");
+  });
+
+  afterAll(() => {
+    console.log("afterAll");
+  });
+});
+```
+
+<details>
+
+<summary>실행 결과</summary>
+
+```bash
+console.log
+  beforeAll
+
+    at src/__test__/Signup.spec.tsx:3:13
+
+console.log
+  beforeEach
+
+    at Object.<anonymous> (src/__test__/Signup.spec.tsx:7:13)
+
+console.log
+  회원가입 성공
+
+    at Object.<anonymous> (src/__test__/Signup.spec.tsx:11:13)
+
+console.log
+  afterEach
+
+    at Object.<anonymous> (src/__test__/Signup.spec.tsx:19:13)
+
+console.log
+  beforeEach
+
+    at Object.<anonymous> (src/__test__/Signup.spec.tsx:7:13)
+
+console.log
+  signup success
+
+    at Object.<anonymous> (src/__test__/Signup.spec.tsx:15:13)
+
+console.log
+  afterEach
+
+    at Object.<anonymous> (src/__test__/Signup.spec.tsx:19:13)
+
+console.log
+  afterAll
+
+    at src/__test__/Signup.spec.tsx:23:13
+
+PASS  src/__test__/Signup.spec.tsx
+회원가입 테스트
+  ✓ 회원가입 성공 (3 ms)
+  ✓ signup fail (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        0.137 s, estimated 1 s
+Ran all test suites.
+```
+
+</details>

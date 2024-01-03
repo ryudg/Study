@@ -1,5 +1,9 @@
 # Jest
 
+> https://jestjs.io/docs/getting-started
+
+Jest는 FaceBook에 의해서 만들어진 테스팅 프레임 워크이며 테스트 케이스를 작성하고 실행할 수 있도록 도와준다.
+
 ## Install
 
 ```bash
@@ -265,7 +269,7 @@ describe("SignUpForm Component", () => {
   });
 
   describe("값을 입력하지 않고 제출했을 때", () => {
-    test("이메일을 입력하지 않으면 에러 메세지가 출력됩니다.", async () => {
+    test("이메일을 입력하지 않으면 에러 메세지가 출력된다.", async () => {
       // when: SignUpForm 컴포넌트가 렌더링되고 Sign Up 버튼을 클릭했을 때
       render(<SignUpForm onSubmit={mockOnSubmit} />);
       fireEvent.click(screen.getByText("Sign Up"));
@@ -279,7 +283,7 @@ describe("SignUpForm Component", () => {
       expect(mockOnSubmit).not.toHaveBeenCalled();
     });
 
-    test("비밀번호를 입력하지 않으면 에러 메세지가 출력됩니다.", async () => {
+    test("비밀번호를 입력하지 않으면 에러 메세지가 출력된다.", async () => {
       // when: SignUpForm 컴포넌트가 렌더링되고 Sign Up 버튼을 클릭했을 때
       render(<SignUpForm onSubmit={mockOnSubmit} />);
       fireEvent.click(screen.getByText("Sign Up"));
@@ -295,7 +299,7 @@ describe("SignUpForm Component", () => {
   });
 
   describe("값을 입력하고 제출했을 때", () => {
-    test("유효한 이메일과 비밀번호를 입력하면 onSubmit이 호출됩니다.", async () => {
+    test("유효한 이메일과 비밀번호를 입력하면 onSubmit이 호출된다.", async () => {
       // given: SignUpForm 컴포넌트가 렌더링되었고, 이메일과 비밀번호를 입력하고 Sign Up 버튼을 클릭했을 때
       render(<SignUpForm onSubmit={mockOnSubmit} />);
       fireEvent.change(screen.getByLabelText("Email:"), {
@@ -343,3 +347,62 @@ Ran all test suites related to changed files.
 ```
 
 </details>
+
+### Jest
+
+#### jest.fn()
+
+`jest.fn()`은 Mock 함수를 생성하는 함수로, Mock 함수를 생성할 때 사용한다.
+
+> Mock 함수란 실제 함수와 같은 동작을 하지만, 실제 함수를 호출하지 않고 함수 호출 여부와 함수 호출 시 전달된 인자 등을 확인할 수 있는 함수이다.
+> 이를 통해 테스트 중에 함수의 호출 및 반환 값을 추적하고 제어할 수 있어 함수가 호출되었는지, 함수가 호출되었을 때 전달된 인자가 올바른지 등을 확인할 수 있다.
+
+```tsx
+// Mock 함수 생성
+const mockFunction = jest.fn();
+
+// Mock 함수 호출
+mockFunction("argument1", "argument2");
+
+// Mock 함수 호출 정보 확인
+console.log(mockFunction.mock.calls); // 출력: [['argument1', 'argument2']]
+
+// Mock 함수를 생성하고, 항상 true를 반환하는 함수
+const returnsTrue = jest.fn(() => true);
+
+// Mock 함수를 호출하면 항상 true가 반환되어, console.log에는 true가 출력
+console.log(returnsTrue()); // true;
+
+// Mock 함수가 호출되었는지 확인
+expect(mockFunction).toHaveBeenCalled();
+
+// Mock 함수가 특정 인자와 함께 호출되었는지 확인
+expect(mockFunction).toHaveBeenCalledWith("argument1", "argument2");
+```
+
+#### `expect`
+
+| 메서드                                         | 설명                                                            |
+| ---------------------------------------------- | --------------------------------------------------------------- |
+| `expect(value)`                                | 값을 테스트하기 위한 `expect` 객체를 생성한다.                  |
+| `.toBe(expected)`                              | 값이 기대값과 정확히 일치하는지 검사한다.                       |
+| `.toEqual(expected)`                           | 객체나 배열의 내용이 기대값과 동일한지 검사한다.                |
+| `.not.toBe(expected)`                          | 값이 기대값과 정확히 일치하지 않는지 검사한다.                  |
+| `.toBeNull()`                                  | 값이 `null`인지 검사한다.                                       |
+| `.toBeDefined()`                               | 값이 정의되었는지 검사한다.                                     |
+| `.toBeTruthy()`                                | 값이 Truthy한 값인지 검사한다.                                  |
+| `.toBeFalsy()`                                 | 값이 Falsy한 값인지 검사한다.                                   |
+| `.toContain(expected)`                         | 배열이나 문자열이 특정 값 또는 요소를 포함하는지 검사한다.      |
+| `.toHaveLength(expected)`                      | 배열이나 문자열의 길이가 기대값과 일치하는지 검사한다.          |
+| `.toMatch(patternOrRegex)`                     | 정규 표현식이나 문자열과 일치하는지 검사한다.                   |
+| `.toHaveBeenCalledWith(arg1, arg2, ...)`       | 함수가 특정 인자와 함께 호출되었는지 검사한다.                  |
+| `.toHaveBeenCalledTimes(expected)`             | 함수가 특정 횟수로 호출되었는지 검사한다.                       |
+| `.toHaveBeenCalled()`                          | 함수가 최소한 한 번 이상 호출되었는지 검사한다.                 |
+| `.toHaveBeenLastCalledWith(arg1, arg2, ...)`   | 함수가 마지막 호출될 때 특정 인자와 함께 호출되었는지 검사한다. |
+| `.toHaveReturned()`                            | 함수가 반환 값을 가지는지 검사한다.                             |
+| `.toHaveReturnedWith(expected)`                | 함수가 특정 값과 일치하는 값을 반환했는지 검사한다.             |
+| `.toHaveBeenNthCalledWith(n, arg1, arg2, ...)` | 함수가 n번째 호출될 때 특정 인자와 함께 호출되었는지 검사한다.  |
+| `.toThrow()`                                   | 함수가 예외를 발생시켰는지 검사한다.                            |
+| `.toThrowErrorMatchingSnapshot()`              | 함수가 스냅샷과 일치하는 에러를 발생시켰는지 검사한다.          |
+
+이러한 `expect` 객체의 메서드들은 Jest에서 테스트 시나리오를 작성할 때 사용되며, 각 메서드는 특정 검사 기능을 수행한다.

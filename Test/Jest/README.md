@@ -181,6 +181,10 @@ expect(mockFunction).toHaveBeenCalledWith("argument1", "argument2");
 
 <summary>코드</summary>
 
+> given: 환경
+> when: 조건
+> then: 결과
+
 #### given
 
 ```tsx

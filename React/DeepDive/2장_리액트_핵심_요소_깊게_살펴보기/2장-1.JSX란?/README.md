@@ -8,7 +8,7 @@
 
 <summary>따라서 V8이나 Deno 같은 자바스크립트 엔진이나 크롬, 웨일, 파이어폭스 등 브라우저에 의해서 실행되거나 표현되도록 만들어진 구문이 아니기 때문에 코드를 바로 실행하면 에러가 발생한다.</summary>
 
-```jsx
+```tsx
 // SyntaxError: Unexpected token '<'
 const Component = (
   <div>
@@ -47,7 +47,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 > <details>
 > <summary>대문자로 시작해야만 하는 컴포넌트</summary>
 >
-> ```jsx
+> ```tsx
 > function hello(text) {
 >   return <div>{text}</div>;
 > }
@@ -71,7 +71,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
   <summary><code>JSXNamespacedName</code> 예시</summary>
 
-  ```jsx
+  ```tsx
   function Valid$() {
     return <$>Valid$</$>;
   }
@@ -93,7 +93,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
   <summary><code>JSXNamespacedName</code> 예시</summary>
 
-  ```jsx
+  ```tsx
   function Valid() {
     return <foo:bar>Valid</foo:bar>;
   }
@@ -111,7 +111,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
   <summary><code>JSXMemberExpression</code> 예시</summary>
 
-  ```jsx
+  ```tsx
   function Valid() {
     return <foo.bar>Valid</foo.bar>;
   }
@@ -136,7 +136,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
   <summary><code>JSXSpreadAttribute</code> 예시</summary>
 
-  ```jsx
+  ```tsx
   const AssignmentExpression = {
     className: "foo",
     id: "bar",
@@ -159,7 +159,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
     <summary><code>JSXAttributeName</code> 예시</summary>
 
-    ```jsx
+    ```tsx
     function Valid() {
       return <foo.bar foo:bar="baz" />;
     }
@@ -174,7 +174,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
       <summary><code>JSXElement</code> 예시</summary>
 
-      ```jsx
+      ```tsx
       function Child({ attribute }) {
         return <div>{attribute}</div>;
       }
@@ -203,7 +203,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
     <summary><code>JSXChild</code> 예시</summary>
 
-    ```jsx
+    ```tsx
     export default function App() {
       // foo라는 문자가 출력된다.
       return <>{(() => "foo")()}</>;
@@ -224,7 +224,7 @@ JSX를 구성하는 가장 기본적인 요소로 HTML의 요소와 비슷한 �
 
 <summary>이스케이프 예시</summary>
 
-```jsx
+```tsx
 // 문제 없음
 <button>\</button>
 
@@ -244,7 +244,7 @@ let escape = "\";
 
 <summary>JSX 예제</summary>
 
-```jsx
+```tsx
 // 하나의 요소로 구성된 형태
 const ComponentA = <div>foo</div>;
 
@@ -277,7 +277,7 @@ const ComponentH = (
 
 <summary>리액트에서는 유효하지 않거나 사용하는 경우가 거의 없지만 JSX 문법으로는 유효한 경우.</summary>
 
-```jsx
+```tsx
 function ComponentA() {
   return <A.B></A.B>;
 }
@@ -300,3 +300,157 @@ function ComponentE() {
 ```
 
 </details>
+
+## 1.3 JSX는 어떻게 자바스크립트에서 변환될까?
+
+자바스크립트에서 JSX가 변환되는 방식을 알기 위해서는 리액트에서 JSX를 변환하는 `@babel/plugin-transform-react-jsx` 플러그인을 살펴보면 된다.
+
+이 플러그인은 JSX 구문을 자바스크립트가 이해할 수 있는 코드로 변환해주는 역할을 한다.
+
+```tsx
+const ComponentA = <Foo required={true}>Hello World</Foo>;
+
+const ComponentB = <>Hello World</>;
+
+const ComponentC = (
+  <div>
+    <span>Hello World</span>
+  </div>
+);
+```
+
+위의 코드는 아래와 같이 변환된다.
+
+```tsx
+"use strict";
+
+var ComponentA = React.createElement(
+  Foo,
+  {
+    required: true,
+  },
+  "Hello World"
+);
+
+var ComponentB = React.createElement(React.Fragment, null, "Hello World");
+
+var ComponentC = React.createElement(
+  "div",
+  null,
+  React.createElement("span", null, "Hello World")
+);
+```
+
+<details>
+
+<summary>리액트 17, 바벨 7.9.0 이후 추가된 자동 런타임(automatic runtime)으로 트랜스파일한 결과</summary>
+
+```tsx
+"use strict";
+
+var _jsxRuntime = require("custom-jsx-library/jsx-runtime");
+
+var ComponentA = (0, _jsxRuntime.jsx)(Foo, {
+  required: true,
+  children: "Hello World",
+});
+
+var ComponentB = (0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
+  children: "Hello World",
+});
+
+var ComponentC = (0, _jsxRuntime.jsx)("div", {
+  children: (0, _jsxRuntime.jsx)("span", { children: "Hello World" }),
+});
+```
+
+</details>
+
+`@babel/plugin-transform-react-jsx` 플러그인을 직접 사용하고 싶다면 패키지를 설치 후 아래와 같이 사용하면 된다.
+
+```tsx
+import * as Babel from "@babel/stanalone";
+
+Babel.regusterPlugin(
+  "@babel/plugin-transform-react-jsx",
+  require("@babel/plugin-transform-react-jsx")
+);
+
+const BABEL_CONFIG = {
+  presets: [],
+  plugins: [
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        throwIfNamespace: false,
+        runtime: "automatic",
+        importSource: "custom-jsx-library",
+      },
+    ],
+  ],
+};
+
+const SOURCE_CODE = `const ComponentA = <Foo>Hello</Foo>`;
+
+const { code } = Babel.transformSync(SOURCE_CODE, BABEL_CONFIG);
+```
+
+결과물에 차이가 있지만 공통점이 있다.
+
+1. `JSXElement`를 첫 번째 인수로 선언해 요소를 정의한다.
+2. optional인 `JSXChildren`, `JSXAtrributes`, `JSXStrings`은 이후 인수로 넘겨 처리한다.
+
+이 점을 활용하면 경우에 따라 다른 `JSXElement`를 렌더링해야할 때 굳이 요소 전체를 감싸지 않더라도 처리할 수 있다.
+이는 `JSXElement`만 다르고, `JSXAtrributes`, `JSXChildren`이 동일한 상확에서 중복된 코드를 최소화할 수 있어 유용하다.
+
+<details>
+
+<summary><code>props</code> 여부에 따라 <code>children</code> 요소만 달라지는 경우</summary>
+
+<details>
+
+<summary>전체 내용을 삼항 연산자로 처리할 경우 중복된 코드가 발생한다.</summary>
+
+```tsx
+import { createElement, PropsWithChildren } from "react";
+
+function TextOrHeading({
+  isHeading,
+  children,
+}: PropsWithChildren<{ isHeading: boolean }>) {
+  return isHeading ? (
+    <h1 className="text">{children}</h1>
+  ) : (
+    <p className="text">{children}</p>
+  );
+}
+```
+
+</details>
+
+<details>
+
+<summary>JSX가 변환되는 특성을 활용할 경우 중복된 코드를 최소화할 수 있다.</summary>
+
+```tsx
+import { createElement } from "react";
+
+function TextOrHeading({
+  isHeading,
+  children,
+}: PropsWithChildren<{ isHeading: boolean }>) {
+  return createElement(isHeading ? "h1" : "p", { className: "text" }, children);
+}
+```
+
+</details>
+
+JSX 반환값이 결국 `React.createElement`로 귀결된다는 사실을 알면 쉽게 리팩터링할 수 있다.
+
+</details>
+
+## 1.4 요약
+
+리액트에서는 모든 JSX 문법이 사용되는 것은 아니다.
+
+JSX 문법에는 있지만, 실제 리액트에서 사용하지 않는 문법은 `JSXNamespacedName`, `JSXMemberExpression`이 있다.

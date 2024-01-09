@@ -83,3 +83,14 @@
      - 다양한 언어를 사용하여 테스트를 작성하고자 하는 경우.
 
   </details>
+
+## 3주차
+
+- 성능 측정 도구
+  - Lighthouse
+  - Performance
+  - PageSpeed Insights
+  - Profiler
+- 최적화
+  - Code Splitting
+  - Lazy Loading

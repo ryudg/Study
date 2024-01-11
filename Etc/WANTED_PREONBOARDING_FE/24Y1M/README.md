@@ -94,3 +94,10 @@
 - 최적화
   - Code Splitting
   - Lazy Loading
+
+## 4주차
+
+- Code Splitting
+- 이미지 최적화
+- 폰트 최적화
+- 추상화
